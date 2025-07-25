@@ -1,5 +1,43 @@
 import sys
 
+class Puzzle():
+    def __init__(self, size, puzzle):
+        self.size = size
+        self.puzzle = puzzle
+        self.flat_puzzle = [num for row in puzzle for num in row]
+
+    def manhattan(self):
+        """Calculate the Manhattan (min movements) distance of the puzzle."""
+        dist = 0
+        for idx, value in enumerate(self.flat_puzzle):
+            if value == 0:
+                goal_idx = self.size * self.size - 1  # Solving from bottom-right
+            else:
+                goal_idx = value - 1
+            x1, y1 = divmod(idx, self.size)
+            x2, y2 = divmod(goal_idx, self.size)
+            dist += abs(x1 - x2) + abs(y1 - y2)
+        return dist
+
+    def hamming(self):
+        """Count the number of misplaced tiles."""
+        dist = 0
+        for idx, value in enumerate(self.flat_puzzle):
+            if value != 0 and value != idx + 1:
+                dist += 1
+        return dist
+    
+    def manhattan_linear(self):
+        """Calculate the Manhattan distance using linear conflict."""
+        pass
+
+    def solve(self):
+        pass
+    
+    def is_solvable(self):
+        """Check if the puzzle is solvable."""
+        # https://www.geeksforgeeks.org/dsa/check-instance-8-puzzle-solvable/
+
 def main():
     try: 
         if len(sys.argv) != 2:
@@ -37,6 +75,8 @@ def main():
         print("Puzzle loaded successfully:")
         for row in puzzle:
             print(row)
+            
+        return puzzle, size
 
         
     except Exception as e:
@@ -47,4 +87,8 @@ def main():
     # Process the puzzle_input and implement the N-Puzzle solver logic here
 
 if __name__ == "__main__" :
-    main()
+
+    ui_puzzle, size = main()
+    puzzle = Puzzle(size, ui_puzzle)
+    print("Manhattan distance:", puzzle.manhattan())
+    print("Hamming distance:", puzzle.hamming())
