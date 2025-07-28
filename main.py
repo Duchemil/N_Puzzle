@@ -28,15 +28,86 @@ class Puzzle():
         return dist
     
     def manhattan_linear(self):
-        """Calculate the Manhattan distance using linear conflict."""
-        pass
+        """Calculate Manhattan distance with linear conflict."""
+        manhattan = self.manhattan()
+        linear_conflict = 0
+
+        # Row conflicts
+        for row in range(self.size):
+            tiles_in_row = []
+            for col in range(self.size):
+                tile = self.puzzle[row][col]
+                if tile == 0:
+                    continue
+                goal_row = (tile - 1) // self.size
+                goal_col = (tile - 1) % self.size
+                if goal_row == row:
+                    tiles_in_row.append((col, goal_col))
+            # Count conflicts in this row
+            for i in range(len(tiles_in_row)):
+                for j in range(i + 1, len(tiles_in_row)):
+                    col_i, goal_col_i = tiles_in_row[i]
+                    col_j, goal_col_j = tiles_in_row[j]
+                    if goal_col_i > goal_col_j and col_i < col_j:
+                        linear_conflict += 1
+
+        # Column conflicts
+        for col in range(self.size):
+            tiles_in_col = []
+            for row in range(self.size):
+                tile = self.puzzle[row][col]
+                if tile == 0:
+                    continue
+                goal_row = (tile - 1) // self.size
+                goal_col = (tile - 1) % self.size
+                if goal_col == col:
+                    tiles_in_col.append((row, goal_row))
+            # Count conflicts in this column
+            for i in range(len(tiles_in_col)):
+                for j in range(i + 1, len(tiles_in_col)):
+                    row_i, goal_row_i = tiles_in_col[i]
+                    row_j, goal_row_j = tiles_in_col[j]
+                    if goal_row_i > goal_row_j and row_i < row_j:
+                        linear_conflict += 1
+
+        return manhattan + 2 * linear_conflict
 
     def solve(self):
         pass
     
-    def is_solvable(self):
-        """Check if the puzzle is solvable."""
-        # https://www.geeksforgeeks.org/dsa/check-instance-8-puzzle-solvable/
+    # Why doesn't this work?
+    # def is_solvable(self): 
+    #     """Check if the puzzle is solvable (generalized for any size)."""
+    #     def getInvCount(puzzle):
+    #         arr = self.flat_puzzle
+    #         print("Flat puzzle:", arr)
+    #         inv_count = 0
+    #         for i in range(self.size * self.size - 1):
+    #             for j in range(i + 1, self.size * self.size):
+    #                 if arr[j] and arr[i] and arr[i] > arr[j]:
+    #                     inv_count += 1
+    #         return inv_count
+
+    #     def findXPosition(puzzle):
+    #         # Find the row of the blank (0) from the bottom
+    #         for i in range(self.size - 1, -1, -1):
+    #             for j in range(self.size - 1, -1, -1):
+    #                 if puzzle[i][j] == 0:
+    #                     return self.size - i
+
+    #     invCount = getInvCount(puzzle)
+    #     print("Inversion count:", invCount)
+    #     # If grid is odd, return true if inversion
+    #     # count is even.
+    #     if (self.size & 1):
+    #         return ~(invCount & 1)
+
+    #     else:    # grid is even
+    #         pos = findXPosition(self.puzzle)
+    #         if (pos & 1):
+    #             return ~(invCount & 1)
+    #         else:
+    #             return invCount & 1
 
 def main():
     try: 
@@ -90,5 +161,7 @@ if __name__ == "__main__" :
 
     ui_puzzle, size = main()
     puzzle = Puzzle(size, ui_puzzle)
-    print("Manhattan distance:", puzzle.manhattan())
+    print("Size of the puzzle:", size)
+    print("Manhattan/Taxicab distance:", puzzle.manhattan())
     print("Hamming distance:", puzzle.hamming())
+    print("Manhattan distance with linear conflict:", puzzle.manhattan_linear())
