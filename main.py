@@ -1,5 +1,6 @@
 import sys
 from ida_solve import ida_star
+from weighted_solve import weighted_astar
 from puzzle import Puzzle
 
 def main():
@@ -61,4 +62,14 @@ print("Is the puzzle solvable?", puzzle.is_solvable())
 # Perform IDA* search with the specified heuristic
 heuristic_map = {'-l': 3, '-m': 1, '-h': 2}
 heuristic = heuristic_map[sys.argv[2]]
-ida_star(puzzle, heuristic)
+# print solution
+# solution = ida_star(puzzle, heuristic)
+solution = weighted_astar(puzzle, heuristic)
+if solution:
+    print("Solution found:")
+    for step in solution:
+        print(step)
+        print('-' * 10)
+    print("Done in {} steps.".format(len(solution)))
+else:
+    print("No solution found.")
