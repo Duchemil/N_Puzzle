@@ -1,6 +1,7 @@
 # N-Puzzle Solver
 
-This project solves the N-Puzzle (also known as "Taquin" in French) using primarily the informed search algorithms **Weighted A\***, it also includes **Uniform-Cost Search** and **Greedy Search** for the bonus part. The solver supports different heuristics (Manhattan, Hamming and Manhattan with Linear Conflict) and provides statistics about the search process.
+This project solves the N-Puzzle (also known as "Taquin" in French) using primarily the informed search algorithms **Weighted A\***, it also includes **Uniform-Cost Search** and **Greedy Search** for the bonus part.\
+The solver supports different heuristics (Manhattan, Hamming and Manhattan with Linear Conflict) and provides statistics about the search process.
 
 ---
 
@@ -21,7 +22,7 @@ This project solves the N-Puzzle (also known as "Taquin" in French) using primar
 
 ## Usage
 
-The program can currently handle random puzzle up to 5x5 in size.
+The program can currently handle random puzzle up to 5x5 in size.\
 With a 6x6 generated randomly it starts to take a lot of time to solve, easy 6x6 can be solved without problems.
 ```bash
 python [main.py](http://_vscodecontentref_/0) <input_file.txt> <heuristic_type> [search_mode]
@@ -34,13 +35,13 @@ Input_file example :
 5 1 2
 8 7 0
 ```
-Heuristic type : 
--m -> Manhattan Distance
--h -> Hamming Distance
+Heuristic type : \
+-m -> Manhattan Distance\
+-h -> Hamming Distance\
 -l -> Manhattan Distance with Linear Conflict
 
-Search mode (bonuses) : 
--u -> Uniform-Cost Search (Keep in mind that this one is very slow)
+Search mode (bonuses) : \
+-u -> Uniform-Cost Search (Keep in mind that this one is very slow)\
 -g -> Greedy Search
 
 ## Output :
