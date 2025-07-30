@@ -1,5 +1,0 @@
-# This puzzle is solvable
-3
-2 3 7
-5 8 6
-4 1 0
