@@ -25,9 +25,10 @@ The program can currently handle random puzzle up to 5x5 in size.
 With a 6x6 generated randomly it starts to take a lot of time to solve, easy 6x6 can be solved without problems.
 ```bash
 python [main.py](http://_vscodecontentref_/0) <input_file.txt> <heuristic_type> [search_mode]
-
+```
 Input_file example :
-```# This is a comment, next line is the size, puzzle afterwards.
+```
+# This is a comment, next line is the size, puzzle afterwards.
 3 
 4 6 3
 5 1 2
