@@ -28,7 +28,7 @@ python [main.py](http://_vscodecontentref_/0) <input_file.txt> <heuristic_type> 
 
 Input_file example :
 ```
-# This is a comment, next line is the size, puzzle afterwards.
+`#` This is a comment, next line is the size, puzzle afterwards.
 3 
 4 6 3
 5 1 2
